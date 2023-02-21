@@ -1,0 +1,5 @@
+Informe sua opção:
+[d] Depositar
+[s] Sacar
+[e] Extrato
+[q] Sair
