@@ -1,7 +1,7 @@
 from typing import List, Tuple, Dict, Union
 
 
-def menu():
+def menu() -> None:
     """Exibir mensagem de menu."""
     mensagem_menu: str = "\n" + " Menu ".center(30, "#")
     with open("opcoes_menu.txt", encoding="utf-8") as msg:
@@ -10,7 +10,8 @@ def menu():
     return input(mensagem_menu).lower()
 
 
-def depositar(saldo: float, valor: float, extrato: str, /):
+def depositar(saldo: float, valor: float, 
+              extrato: str, /) -> Tuple[float, None]:
     """Executar operação depósito do cliente.
 
     Args:
@@ -32,9 +33,10 @@ def depositar(saldo: float, valor: float, extrato: str, /):
     return saldo, extrato
 
 
-def sacar(*, saldo: float, valor: float, extrato: str, 
-          limite: float, numero_saques: int, limite_saques: int):
-    """_summary_
+def sacar(*, saldo: float, valor: float, 
+          extrato: str, limite: float, 
+          numero_saques: int, limite_saques: int) -> Tuple[float, None]:
+    """Realizar saque da conta.
 
     Args:
         saldo (float): Saldo bancário da conta do cliente.
@@ -49,8 +51,8 @@ def sacar(*, saldo: float, valor: float, extrato: str,
                              respectivamente..
     """
     excedeu_saldo: bool = valor > saldo
-    excedeu_limite: bool = valor > LIMITE
-    excedeu_saques: bool = numero_saques >= LIMITE_SAQUES
+    excedeu_limite: bool = valor > limite
+    excedeu_saques: bool = numero_saques >= limite_saques
 
     if excedeu_saldo:
         print("Operação falhou! Você não tem saldo suficiente.")
@@ -69,7 +71,7 @@ def sacar(*, saldo: float, valor: float, extrato: str,
     return saldo, extrato
 
 
-def exibir_extrato(saldo, /, *, extrato):
+def exibir_extrato(saldo, /, *, extrato) -> None:
     """Exibir extrato do usuário.
 
     Args:
@@ -83,7 +85,7 @@ def exibir_extrato(saldo, /, *, extrato):
     print("=========================================")
 
 
-def filtrar_usuario(cpf: str, usuarios: List):
+def filtrar_usuario(cpf: str, usuarios: List) -> Union[Dict, None]:
     """Filtrar usuário.
 
     Args:
@@ -91,7 +93,7 @@ def filtrar_usuario(cpf: str, usuarios: List):
         usuarios (List): Lista de usuários cadastrados
 
     Returns:
-        (Unio[Dict, None]): Dicionário com dados do usuário encontrado. 
+        (UnioN[Dict, None]): Dicionário com dados do usuário encontrado. 
                             Return None caso não seja encontrado.
     """
     usuarios_filtrados: List[dict] = [usuario for usuario in usuarios 
@@ -99,7 +101,7 @@ def filtrar_usuario(cpf: str, usuarios: List):
     return usuarios_filtrados[0] if usuarios_filtrados else None
 
 
-def criar_usuario(usuarios: List):
+def criar_usuario(usuarios: List) -> None:
     """Cadastrar conta usuário.
 
     Args:
@@ -125,12 +127,13 @@ def criar_usuario(usuarios: List):
     print("Usuário criado com sucesso!")
 
 
-def criar_conta(agencia: str, numero_conta: str, usuarios: List):
+def criar_conta(agencia: str, numero_conta: int, 
+                usuarios: List) -> Union[Dict, None]:
     """Criar conta para o usuário
 
     Args:
         agencia (str): agencia relacionado ao usuário
-        numero_conta (str): Némro da conta relacionado ao usuário.
+        numero_conta (int): Número da conta relacionado ao usuário.
         usuarios (List): Lista contendo usuários já cadastrados.
 
     Returns:
@@ -148,7 +151,7 @@ def criar_conta(agencia: str, numero_conta: str, usuarios: List):
     print("\n Usuário não encontrado, fluxo de criação de conta encerrado.")
 
 
-def listar_contas(contas: List):
+def listar_contas(contas: List) -> None:
     for conta in contas:
         texto_conta = f"Agência: {conta['agencia']}\n"
         texto_conta += f"CC: {conta['numero_conta']}\n"

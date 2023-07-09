@@ -1,0 +1,9 @@
+Informe sua opção:
+
+[d]     Depositar
+[s]     Sacar
+[e]     Extrato
+[cc]    Cadastrar conta
+[lc]    Listar contas
+[nu]    Novo usuário
+[q]     Sair
